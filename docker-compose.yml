@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=src.app
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - PYTHONPATH=/app
+    working_dir: /app
+    volumes:
+      - .:/app
+      #- ./test.db:/app/test.db  # Persister la base de données SQLite
+    networks:
+      - flask-network
+    command: python -m flask run --host=0.0.0.0 --port=5000
+
+  # Service pour les tests
+  # test:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - FLASK_APP=app.py
+  #     - FLASK_ENV=testing
+  #   volumes:
+  #     - .:/app
+  #   networks:
+  #     - flask-network
+  #   command: python -m pytest tests/ -v
+  #   profiles:
+  #     - test
+
+networks:
+  flask-network:
+    driver: bridge

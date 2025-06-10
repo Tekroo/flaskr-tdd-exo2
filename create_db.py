@@ -1,7 +1,7 @@
 # create_db.py
 
 
-from project.app import app, db
+from src.app import app, db
 
 
 with app.app_context():

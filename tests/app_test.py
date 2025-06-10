@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from project.app import app, db
+from src.app import app, db
 
 TEST_DB = "test.db"
 
